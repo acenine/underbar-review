@@ -95,7 +95,7 @@
          * `lastElement` would be 4 instead!
          *
          * The tricky part is that we have no way of knowing about the mutation
-         * just by looking at the code above. We'd have to dive into the
+         * just by looking at the code above. We would have to dive into the
          * implementation of each to the exact line that uses `pop`.
          * If we write a lot of code with this assumption, it might be very hard
          * to trace back to the correct line in each.

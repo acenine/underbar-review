@@ -257,7 +257,7 @@
          * opportunity. The safest thing to do when working with `arguments` is convert it into a
          * real array that every JavaScript engine will know how to handle.
          *
-         * If you're not sure how to do that, Stack Overflow has plenty to say on the topic.
+         * If you are not sure how to do that, Stack Overflow has plenty to say on the topic.
          */
 
         var destination = {};

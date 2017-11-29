@@ -41,7 +41,7 @@
     if (n > array.length) {
       return array;
     }
-    return n === undefined ? array[array.length-1] : array.slice(array.length-n, array.length);
+    return n === undefined ? array[array.length - 1] : array.slice(array.length - n, array.length);
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -82,7 +82,7 @@
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
     let passes = [];
-    _.each(collection, function(element){
+    _.each(collection, function(element) {
       if (test(element)) {
         passes.push(element);
       }
@@ -94,7 +94,7 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    return _.filter(collection, function(element){
+    return _.filter(collection, function(element) {
       return !test(element);
     });
   };
@@ -118,7 +118,7 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     let mapped = [];
-    _.each(collection, function(element){
+    _.each(collection, function(element) {
       mapped.push(iterator(element));
     });
     return mapped;
@@ -193,7 +193,7 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator = _.identity) {
     // TIP: Try re-using reduce() here.
-    return _.reduce(collection, function(acc, element){
+    return _.reduce(collection, function(acc, element) {
       if (acc && iterator(element)) {
         return true;
       }
@@ -208,7 +208,7 @@
   _.some = function(collection, iterator = _.identity) {
     // TIP: There's a very clever way to re-use every() here.
     return !_.every(collection, function (element) {
-      return !iterator(element)
+      return !iterator(element);
     });
   };
 
@@ -295,7 +295,7 @@
   // instead if possible.
   _.memoize = function(func) {
     let alreadyCalled = {};
-    return function(){
+    return function() {
       if (Object.keys(alreadyCalled).includes((JSON.stringify(arguments)))) {
         return alreadyCalled[(JSON.stringify(arguments))];
       }
@@ -329,14 +329,14 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
-    let randomIndex = function (min, max) {
+    let randomIndex = function(min, max) {
       min = Math.ceil(min);
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
-    }
+    };
     let copy = array.slice();
     for (let i = copy.length - 1; i > 0; i--) {
-      let randIndex = randomIndex(0, i-1);
+      let randIndex = randomIndex(0, i - 1);
       let old = copy[i];
       copy[i] = copy[randIndex];
       copy[randIndex] = old;
