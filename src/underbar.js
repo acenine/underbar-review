@@ -191,14 +191,25 @@
 
 
   // Determine whether all of the elements match a truth test.
-  _.every = function(collection, iterator) {
+  _.every = function(collection, iterator = _.identity) {
     // TIP: Try re-using reduce() here.
+    return _.reduce(collection, function(acc, element){
+      if (acc && iterator(element)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
-  _.some = function(collection, iterator) {
+  _.some = function(collection, iterator = _.identity) {
     // TIP: There's a very clever way to re-use every() here.
+    return !_.every(collection, function (element) {
+      return !iterator(element)
+    });
   };
 
 
@@ -221,11 +232,25 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    for (var i = 1; i < arguments.length; i++) {
+      for (var key in arguments[i]) {
+        obj[key] = arguments[i][key];
+      }
+    }
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    for (var i = 1; i < arguments.length; i++) {
+      for (var key in arguments[i]) {
+        if (!Object.keys(obj).includes(key)) {
+          obj[key] = arguments[i][key];
+        }
+      }
+    }
+    return obj;
   };
 
 
@@ -269,6 +294,17 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    let alreadyCalled = {};
+    return function(){
+      if (Object.keys(alreadyCalled).includes((JSON.stringify(arguments)))) {
+        return alreadyCalled[(JSON.stringify(arguments))];
+      }
+      else {
+        let newval = func.apply(this, arguments);
+        alreadyCalled[(JSON.stringify(arguments))] = newval;
+        return newval;
+      }
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -278,6 +314,7 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    return setTimeout(...arguments);
   };
 
 
@@ -292,6 +329,19 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    let randomIndex = function (min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
+    }
+    let copy = array.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+      let randIndex = randomIndex(0, i-1);
+      let old = copy[i];
+      copy[i] = copy[randIndex];
+      copy[randIndex] = old;
+    }
+    return copy;
   };
 
 
