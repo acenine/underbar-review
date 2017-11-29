@@ -251,7 +251,7 @@
 
       it('should return all odd numbers in an array', function() {
         var isOdd = function(num) { return num % 2 !== 0; };
-        var odds = _.filter([1,2,3,4,5], isOdd);
+        var odds = _.filter([1, 2, 3, 4, 5], isOdd);
 
         expect(odds).to.eql([1, 3, 5]);
       });
@@ -376,7 +376,9 @@
       });
 
       it('should apply a function to every value in an array', function() {
-        var multiplyByTwo = function(num) {return num*2;};
+        var multiplyByTwo = function(num) {
+          return num * 2;
+        };
 
         expect(_.map([1, 2, 3], multiplyByTwo)).to.eql([2, 4, 6]);
       });

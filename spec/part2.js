@@ -191,8 +191,8 @@
       it('should override properties found on the destination', function() {
         // Replace this line with an `expect` statement that tests
         // the behavior described by the `it` string
-        var obj1 = {a : 1};
-        var obj2 = {a : 2, b : 2};
+        var obj1 = {a: 1};
+        var obj2 = {a: 2, b: 2};
         expect(_.extend(obj1, obj2)).to.eql(obj2);
       });
 
@@ -271,9 +271,9 @@
       it('should copy any property whose key is not already set on the target', function() {
         // Replace this line with an `expect` statement that tests
         // the behavior described by the `it` string
-        var obj1 = {a : 1};
-        var obj2 = {a : 2, b : 2};
-        expect(_.defaults(obj1, obj2)).to.eql({a : 1, b : 2});
+        var obj1 = {a: 1};
+        var obj2 = {a: 2, b: 2};
+        expect(_.defaults(obj1, obj2)).to.eql({a: 1, b: 2});
       });
 
       it('should not copy a property if that key is already set on the target', function() {
